@@ -17,7 +17,6 @@ import { WindowsShellType, WINDOWS_DEFAULT_SHELL_PATH_MAPS } from '../common/she
 import { findExecutable, findShellExecutableAsync, getSystemShell, WINDOWS_GIT_BASH_PATHS } from './shell';
 import { ITerminalProfileServiceNode, TerminalProfileServiceNode } from './terminal.profile.service';
 
-
 /**
  * this RPC target: NodePtyTerminalService
  */
@@ -82,6 +81,10 @@ export class TerminalServiceClientImpl extends RPCService<IRPCTerminalService> i
       if (pty) {
         this.terminalService.setClient(this.clientId, this);
         this.logger.log(`client ${id} create ${pty.pid} with options `, launchConfig);
+        this.logger.log(
+          `terminal client ${id} and clientID: ${this.clientId} create ${pty.pid} with options `,
+          launchConfig,
+        );
         this.terminalMap.set(id, pty);
         return {
           id,
